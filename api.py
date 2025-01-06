@@ -18,8 +18,9 @@ def api_call(method: str, endpoint: str, data: dict | None = None) -> dict:
         method,
         IMMICH_URL + "/api/" + endpoint,
         headers={"x-api-key": IMMICH_API_KEY},
-        json=data,
+        json=data if method != "GET" else None,
         timeout=5,
+        params=data if method == "GET" else None,
         )
     status = HTTPStatus(res.status_code)
     if not status.is_success:

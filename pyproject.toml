@@ -19,6 +19,9 @@ ignore = [
     "D", # pydocstyle
     "CPY", # flake8-copyright
     "T20", # flake8-print
+    "TD002", # dont require to/do link
+    "TD003", # dont require to/do author
+    "FIX002", # dont warn about TODOs in comments
 ]
 
 [tool.uv]
