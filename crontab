@@ -1,1 +1,1 @@
-/15 0 * * * python archive_albums.py
+*/15 * * * * python /app/archive_albums.py

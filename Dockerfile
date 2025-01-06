@@ -1,7 +1,5 @@
 FROM ghcr.io/astral-sh/uv:python3.13-alpine
 
-RUN which crond && rm -rf /etc/periodic
-
 WORKDIR /app
 
 ENV UV_COMPILE_BYTECODE=1
@@ -21,6 +19,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 ENTRYPOINT []
 
-COPY crontab /var/spool/cron/crontabs/root
+COPY crontab /etc/crontabs/root
 
 CMD ["crond", "-f", "-l", "2"]
