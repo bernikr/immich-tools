@@ -10,7 +10,7 @@ DO_NOT_ARCHIVE = os.getenv("DO_NOT_ARCHIVE")
 if __name__ == "__main__":
     log("Starting archiving")
 
-    do_not_archive = []
+    do_not_archive: list[str] = []
     if DO_NOT_ARCHIVE:
         album_info = api_call("GET", f"albums/{DO_NOT_ARCHIVE}")
         do_not_archive.extend(map(itemgetter("id"), album_info["assets"]))
@@ -22,7 +22,7 @@ if __name__ == "__main__":
             log("Unarchiving assets...")
             api_call("PUT", "assets", {"ids": to_unarchive, "isArchived": False})
 
-    to_archive = []
+    to_archive: list[str] = []
     for album_id in ARCHIVE_ALBUMS:
         album_info = api_call("GET", f"albums/{album_id}")
         to_archive.extend(map(itemgetter("id"), filter(lambda x: not x["isArchived"], album_info["assets"])))
