@@ -1,13 +1,19 @@
+import logging
 import os
 from operator import itemgetter
 
-from api import api_call
-from log import log
+from common.api import api_call
+from init import schedule
 
 ARCHIVE_ALBUMS = os.getenv("ARCHIVE_ALBUMS", "").split(",")
 DO_NOT_ARCHIVE = os.getenv("DO_NOT_ARCHIVE")
 
-if __name__ == "__main__":
+logger = logging.getLogger(__name__)
+log = logger.info
+
+
+@schedule(15)  # every 15 minutes
+def main() -> None:
     log("Starting archiving")
 
     do_not_archive: list[str] = []

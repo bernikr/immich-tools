@@ -1,2 +1,0 @@
-*/15 * * * * python /app/archive_albums.py
-24 4 * * * python /app/archive_raws.py

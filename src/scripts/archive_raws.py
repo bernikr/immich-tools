@@ -1,9 +1,16 @@
-from api import api_call
-from log import log
+import logging
+
+from common.api import api_call
+from init import schedule
 
 RAW_EXTENSIONS = [".rw2", ".dng"]
 
-if __name__ == "__main__":
+logger = logging.getLogger(__name__)
+log = logger.info
+
+
+@schedule("24 4 * * *")  # every day at 4:24am
+def main() -> None:
     files: dict[str, str] = {}
     paths = api_call("GET", "view/folder/unique-paths")
     for i, path in enumerate(paths):
