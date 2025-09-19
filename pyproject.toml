@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "requests==2.32.4",
+    "httpx>=0.28.1",
 ]
 
 [tool.ruff]
@@ -28,7 +28,6 @@ dev-dependencies = [
     "mypy>=1.18.2",
     "pre-commit>=4.3.0",
     "ruff>=0.13.1",
-    "types-requests==2.32.4.20250913",
 ]
 
 [tool.mypy]
