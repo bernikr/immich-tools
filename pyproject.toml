@@ -35,3 +35,6 @@ dev-dependencies = [
 
 [tool.mypy]
 strict = true
+allow_redefinition = true
+allow_redefinition_new = true
+local_partial_types = true
