@@ -6,6 +6,8 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: check-added-large-files
+      - id: check-yaml
+      - id: check-toml
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.12.8
     hooks:
