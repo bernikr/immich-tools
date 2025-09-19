@@ -3,9 +3,7 @@ from http import HTTPStatus
 from typing import Any
 
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
 IMMICH_API_KEY = os.getenv("IMMICH_API_KEY", "")
 IMMICH_URL = os.getenv("IMMICH_URL", "")
 

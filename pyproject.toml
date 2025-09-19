@@ -5,8 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "python-dotenv>=1.0.1",
-    "requests>=2.32.3",
+    "requests==2.32.4",
 ]
 
 [tool.ruff]
@@ -26,10 +25,10 @@ ignore = [
 
 [tool.uv]
 dev-dependencies = [
-    "mypy>=1.17.1",
+    "mypy>=1.18.2",
     "pre-commit>=4.3.0",
-    "ruff>=0.8.6",
-    "types-requests>=2.32.4.20250809",
+    "ruff>=0.13.1",
+    "types-requests==2.32.4.20250913",
 ]
 
 [tool.mypy]
