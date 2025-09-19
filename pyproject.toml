@@ -26,6 +26,7 @@ ignore = [
 ]
 
 [tool.uv]
+package = true
 dev-dependencies = [
     "mypy>=1.18.2",
     "pre-commit>=4.3.0",
