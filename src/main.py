@@ -5,9 +5,13 @@ import importlib
 import logging
 import os
 import pkgutil
+import time
 from typing import TYPE_CHECKING
 
-from init import run
+from anyio import Path
+from apscheduler.triggers.interval import IntervalTrigger
+
+from init import run, schedule
 
 if TYPE_CHECKING:
     from types import ModuleType
@@ -40,6 +44,16 @@ def import_submodules(package: str | ModuleType) -> dict[str, ModuleType]:
 
 modules = import_submodules("scripts")
 logger.info("Loaded %i modules: %s", len(modules), ", ".join(modules.keys()))
+
+
+HEALTHCHECK_FILE: Path | None = Path(os.environ["HEALTHCHECK_FILE"]) if "HEALTHCHECK_FILE" in os.environ else None
+if HEALTHCHECK_FILE:
+
+    @schedule(IntervalTrigger(seconds=30))
+    async def healthcheck() -> None:
+        if HEALTHCHECK_FILE is None:
+            return
+        await HEALTHCHECK_FILE.write_text(str(time.time()))
 
 
 if __name__ == "__main__":

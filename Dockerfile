@@ -28,4 +28,6 @@ ENV PATH="/app/bin:$PATH"
 
 ARG VERSION
 ENV VERSION=${VERSION:-"unspecified"}
+ENV HEALTHCHECK_FILE=/health
+HEALTHCHECK --start-period=30s CMD find /health -mmin -1 | grep -q /health || exit 1
 CMD ["python", "-m", "main"]
