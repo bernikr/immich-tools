@@ -5,15 +5,15 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "apscheduler>=4.0.0a6",
-    "httpx>=0.28.1",
+  "apscheduler>=4.0.0a6",
+  "httpx>=0.28.1",
 ]
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.2",
-    "pre-commit>=4.3.0",
-    "ruff>=0.13.1",
+  "mypy>=2.1.0",
+  "prek>=0.3.13",
+  "ruff>=0.15.12",
 ]
 
 [tool.uv]
@@ -26,13 +26,13 @@ line-length = 120
 preview = true
 select = ["ALL"]
 ignore = [
-    "D", # pydocstyle
-    "CPY", # flake8-copyright
-    "T20", # flake8-print
-    "TD002", # dont require to/do link
-    "TD003", # dont require to/do author
-    "FIX002", # dont warn about TODOs in comments
-    "G004", # f-strings in logging statements
+  "D",      # pydocstyle
+  "CPY",    # flake8-copyright
+  "T20",    # flake8-print
+  "TD002",  # dont require to/do link
+  "TD003",  # dont require to/do author
+  "FIX002", # dont warn about TODOs in comments
+  "G004",   # f-strings in logging statements
 ]
 
 [tool.mypy]

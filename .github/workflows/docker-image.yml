@@ -42,7 +42,7 @@ jobs:
       - name: Set short SHA
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      
+
       - uses: actions/cache@v4
         id: cache
         with:

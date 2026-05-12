@@ -1,15 +1,28 @@
-# See https://pre-commit.com for more information
-# Use `pre-commit install -t commit-msg -t pre-commit` to install the hooks
+# Install with `prek install`
+default_install_hook_types: [pre-commit, commit-msg]
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
+  - repo: builtin
     hooks:
-      - id: end-of-file-fixer
       - id: check-added-large-files
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
       - id: check-yaml
       - id: check-toml
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: detect-private-key
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+        args: [--option, column_width=20]
+  - repo: https://github.com/bernikr/pre-commit-ruff-version-sync
+    rev: v0.1.2
+    hooks:
+      - id: ruff-version-sync
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.1
+    rev: v0.15.12
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -31,6 +44,3 @@ repos:
           - --contrib=CT1
           - --ignore=B6
           - --msg-filename
-ci:
-  skip:
-    - mypy
