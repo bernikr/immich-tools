@@ -30,13 +30,13 @@ line-length = 120
 preview = true
 select = ["ALL"]
 ignore = [
-  "D",      # pydocstyle
-  "CPY",    # flake8-copyright
-  "T20",    # flake8-print
-  "TD002",  # dont require to/do link
-  "TD003",  # dont require to/do author
-  "FIX002", # dont warn about TODOs in comments
-  "G004",   # f-strings in logging statements
+  "D",                   # pydocstyle
+  "CPY",                 # flake8-copyright
+  "T20",                 # flake8-print
+  "missing-todo-author",
+  "missing-todo-link",
+  "line-contains-todo",
+  "logging-f-string",
 ]
 
 [tool.mypy]
