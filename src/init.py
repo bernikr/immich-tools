@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 bernikr <hi@berni.kr>
+#
+# SPDX-License-Identifier: MIT
+
 from collections.abc import Awaitable, Callable
 
 from apscheduler import AsyncScheduler

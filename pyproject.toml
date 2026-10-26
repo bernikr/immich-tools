@@ -1,9 +1,13 @@
+# SPDX-FileCopyrightText: 2025 bernikr <hi@berni.kr>
+#
+# SPDX-License-Identifier: MIT
+
 [project]
 name = "immich-tools"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = "==3.13.*"
 dependencies = [
   "apscheduler>=4.0.0a6",
   "httpx>=0.28.1",
