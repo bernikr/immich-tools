@@ -2,36 +2,37 @@
 #
 # SPDX-License-Identifier: MIT
 
-FROM ghcr.io/astral-sh/uv:python3.15-alpine AS builder
+FROM ghcr.io/astral-sh/uv:trixie-slim AS builder
 SHELL ["sh", "-exc"]
+WORKDIR /src
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
-    UV_PYTHON_DOWNLOADS=0 \
-    UV_PROJECT_ENVIRONMENT=/app
-
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv venv /app
+    UV_NO_DEV=1 \
+    UV_PYTHON_PREFERENCE=only-managed \
+    UV_PYTHON_INSTALL_DIR=/python \
+    UV_PROJECT_ENVIRONMENT=/venv \
+    UV_PREVIEW_FEATURES=frozen-lockfile
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-install-project --no-dev
+    uv sync --frozen --no-install-project
 
 COPY . /src
-WORKDIR /src
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-dev --no-editable
+    uv sync --locked --no-editable
 
-FROM python:3.15-alpine
-SHELL ["sh", "-exc"]
+FROM gcr.io/distroless/cc-debian13:latest AS runtime
 
-COPY --from=builder --chown=app:app /app /app
-ENV PATH="/app/bin:$PATH"
+COPY --from=builder /python /python
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1
 
 ARG VERSION
 ENV VERSION=${VERSION:-"unspecified"}
+
+USER 65532:65532
 ENV HEALTHCHECK_FILE=/health
-HEALTHCHECK --start-period=30s CMD find /health -mmin -1 | grep -q /health || exit 1
+HEALTHCHECK --start-period=30s CMD ["python", "-c", "import os, sys, time; p = os.getenv('HEALTHCHECK_FILE'); sys.exit(0 if os.path.isfile(p) and (time.time() - os.path.getmtime(p) <= 60) else 1)"]
 CMD ["python", "-m", "main"]
