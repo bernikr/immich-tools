@@ -5,9 +5,9 @@
 from collections.abc import Awaitable, Callable
 
 from apscheduler import AsyncScheduler
-from apscheduler.abc import Trigger
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.interval import IntervalTrigger
+lazy from apscheduler.abc import Trigger
 
 scheduler = AsyncScheduler()
 
